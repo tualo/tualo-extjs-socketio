@@ -1,0 +1,32 @@
+{
+    "name": "tualo-extjs-socketio",
+    "version": "0.0.1",
+    "author": [
+        {
+            "name": "Thomas Hoffmann",
+            "email": "thomas.hoffmann@tualo.de",
+            "url": "http://tualo.de/"
+        }
+    ],
+    "maintainers": [
+        {
+            "name": "Thomas Hoffmann",
+            "email": "thomas.hoffmann@tualo.de",
+            "url": "http://tualo.de/"
+        }
+    ],
+    "description": "A socket.io data proxy for ext js",
+    "main": "./lib/main",
+    "engines": {
+        "node": ">=0.8.0"
+    },
+    "keywords": [
+        "extjs"
+    ],
+    "license" : "GPLv3",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/tualo/tualo-extjs-socketio.git"
+    },
+    "readmeFilename": "README.md"
+}
