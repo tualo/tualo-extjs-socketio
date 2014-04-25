@@ -208,10 +208,14 @@ Ext.define ('Tualo.data.proxy.SocketIO', {
     */
     completeTask: function (action, event, data) {
         var me = this ,
+            i = 0,
+            record,
             resultSet = me.getReader().read (data);
 
+         
         // Server push case: the store is get up-to-date with the incoming data
         if (Ext.isEmpty (me.callbacks[event])) {
+            
             var store = Ext.StoreManager.lookup (me.getStoreId ());
 
             if (typeof store === 'undefined') {
@@ -219,8 +223,24 @@ Ext.define ('Tualo.data.proxy.SocketIO', {
                 return false;
             }
 
-            store.loadData (resultSet.records, true);
-            store.fireEvent ('load', store);
+            switch (action){
+                case me.getApi().destroy:
+                    for(i=0;i<resultSet.records.length;i++){
+                        record = store.getById(resultSet.records[i].getId());
+                        if (record !== null){
+                            store.remove(record);
+                        }
+                    }
+                    
+                    break;
+                case me.getApi().read:
+                case me.getApi().update:
+                case me.getApi().create:
+                    store.loadData (resultSet.records, true);
+                    store.fireEvent ('load', store);
+                    break;
+            
+            }          
         }
         // Client request case: a callback function (operation) has to be called
         else {
